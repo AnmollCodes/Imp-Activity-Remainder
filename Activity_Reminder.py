@@ -12,11 +12,10 @@ def send_reminder(msg):
                  description=msg,
                  duration=5).send()
 
-
 def schedule(date):
     hour = date.hour
 
-    # Remind for lunch+water time at 1 PM
+    # Remind for lunch + water time at 1 PM
     if hour == 13 and is_notification_sent[hour] == 0:
         is_notification_sent[hour] = 1
         send_reminder("It's time for lunch and water!!")
@@ -26,18 +25,17 @@ def schedule(date):
         is_notification_sent[hour] = 1
         send_reminder("It's time for snacks and water!!")
 
-    # Remind to log out from work
+    # Remind to log out from studies and sleep
     if hour == 18 and is_notification_sent[hour] == 0:
         is_notification_sent[hour] = 1
-        send_reminder("It's time to log off from work!!")
+        send_reminder("It's time to log off from studies and work!!")
 
-    # Remind for drinking water during office time
+    # Remind for drinking water during college
     for i in range(9, 18):
         if hour == i and hour not in [13, 16] \
                 and is_notification_sent[hour] == 0:
             is_notification_sent[hour] = 1
             send_reminder("It's time to drink water!!")
-
 
 if __name__ == "__main__":
     prev_date = utc_dt.astimezone() - timedelta(days=1)
